@@ -1,1 +1,1 @@
-# bookstore-admin
+# book-store-admin
