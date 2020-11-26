@@ -18,7 +18,7 @@
                 <tbody>
                   <tr>
                     <th scope="row"><input type="checkbox" /></th>
-                    <td class="tm-product-name">{{title}}</td>
+                    <td class="tm-product-name"><a href="/products/{{_id}}">{{title}}</a></td>
                     <td>1000</td>
                     <td>5000</td>
                     <td>{{basePrice}}</td>
@@ -27,7 +27,7 @@
                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                       </a>
                     </td>
-                  </tr>          
+                  </tr>     
                 </tbody>
                 {{/each}}  
               </table>
