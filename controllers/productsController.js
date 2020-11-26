@@ -15,3 +15,9 @@ exports.detail= async(req, res, next) =>
     const sold=tt.sold;
     res.render('products/detail',{title,detail,basePrice,cover,stock});
 };
+exports.delete= async(req, res, next) =>
+{
+    await productsModel.delete(req.params.id);
+    const products = await productsModel.list();
+    res.render('products/list', {products});
+};
