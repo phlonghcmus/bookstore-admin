@@ -21,3 +21,8 @@ exports.delete= async(req, res, next) =>
     const products = await productsModel.list();
     res.render('products/list', {products});
 };
+exports.add= async(req, res, next) =>
+{
+    res.render('products/add', {});
+};
+
