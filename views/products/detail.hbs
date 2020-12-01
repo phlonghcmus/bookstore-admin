@@ -9,7 +9,7 @@
                 </div>
                 <div class="row tm-edit-product-row">
                     <div class="col-xl-6 col-lg-6 col-md-12">
-                        <form action="/products/{{id}}/update" method="post" class="tm-edit-product-form">
+                        <form action="/products/{{id}}/update" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
                             <div class="form-group mb-3">
 
                                 <label
@@ -102,16 +102,16 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                         <div class="tm-product-img-edit mx-auto">
-                            <img src={{cover}} alt="Ảnh Sản Phẩm" class="img-fluid d-block mx-auto">
+                            <img src="{{cover}}" alt="Ảnh Sản Phẩm" class="img-fluid d-block mx-auto">
 
                         </div>
                         <div class="custom-file mt-3 mb-3">
-                            <input id="fileInput" type="file" style="display:none;" />
-                            <input
+                            <input id="avatar" type="file" name="avatar"style="display:none;" />
+                             <input
                                     type="button"
                                     class="btn btn-primary btn-block mx-auto"
                                     value="THAY ĐỔI ẢNH NỀN"
-                                    onclick="document.getElementById('fileInput').click();"
+                                    onclick="document.getElementById('avatar').click();"
                             />
                         </div>
                     </div>

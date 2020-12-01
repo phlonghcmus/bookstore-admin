@@ -31,12 +31,32 @@ exports.add= async(req, res, next) =>
 
 exports.update=async(req, res, next) =>
 {
-    const data={
+    let cover;
+    let data;
+    if(req.file)
+    {
+        cover=req.file.destination + req.file.filename;
+        path=cover.split('/').slice(1).join('/');
+        path2="/";
+        cover=path2.concat(path);
+        console.log(req.file);
+        data={
         title:req.body.name,
         basePrice: req.body.price,
         author: req.body.author,
-        detail: req.body.detail
-    };
+        detail: req.body.detail,
+        cover:cover
+        }
+    }
+    else
+    {
+        data={
+        title:req.body.name,
+        basePrice: req.body.price,
+        author: req.body.author,
+        detail: req.body.detail,
+        }
+    }    
     await productsModel.update(req.params.id,data);
     const products = await productsModel.list();
     res.redirect('/products/'+ req.params.id);
