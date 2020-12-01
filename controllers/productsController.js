@@ -37,7 +37,7 @@ exports.update=async(req, res, next) =>
     {
         cover=req.file.destination + req.file.filename;
         path=cover.split('/').slice(1).join('/');
-        path2="/";
+        path2="https://bookstoremanage.herokuapp.com/";
         cover=path2.concat(path);
         console.log(req.file);
         data={
@@ -67,7 +67,7 @@ exports.add= async(req, res, next) =>
     let cover;
     cover = req.file.destination + req.file.filename;
     path = cover.split('/').slice(1).join('/');
-    path2 = "/";
+    path2="https://bookstoremanage.herokuapp.com/";
     cover = path2.concat(path);
     console.log(req.file);
     const item = {
