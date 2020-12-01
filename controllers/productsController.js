@@ -1,4 +1,5 @@
 const productsModel = require('../models/productsModel');
+
 exports.list = async (req, res, next) => {
     const products = await productsModel.list();
     res.render('products/list', {products});
@@ -13,7 +14,9 @@ exports.detail= async(req, res, next) =>
     const cover=tt.cover;
     const stock=tt.stock;
     const sold=tt.sold;
-    res.render('products/detail',{title,detail,basePrice,cover,stock});
+    const author=tt.author;
+    const id=tt._id;
+    res.render('products/detail',{title,detail,basePrice,cover,stock,author,id});
 };
 exports.delete= async(req, res, next) =>
 {
@@ -26,3 +29,15 @@ exports.add= async(req, res, next) =>
     res.render('products/add', {});
 };
 
+exports.update=async(req, res, next) =>
+{
+    const data={
+        title:req.body.name,
+        basePrice: req.body.price,
+        author: req.body.author,
+        detail: req.body.detail
+    };
+    await productsModel.update(req.params.id,data);
+    const products = await productsModel.list();
+    res.redirect('/products/'+ req.params.id);
+}

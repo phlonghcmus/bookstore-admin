@@ -235,3 +235,5 @@ dist
 .idea/modules.xml
 .idea/source.iml
 .idea/workspace.xml
+.idea/Admin.iml
+.idea/vcs.xml

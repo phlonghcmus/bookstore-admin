@@ -16,3 +16,8 @@ exports.delete=async(id)=>{
     await productCollection.deleteOne({ _id: ObjectId(id) }, function (err, results) {});
 
 }
+
+exports.update=async(id,data)=>{
+    const productCollection=db().collection('books');
+    await productCollection.updateOne({ _id: ObjectId(id) }, {$set: data}, function (err, results) {});
+}

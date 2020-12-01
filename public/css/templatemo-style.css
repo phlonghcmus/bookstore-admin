@@ -439,6 +439,11 @@ input[type="checkbox"]:focus {
 .tm-product-name {
   font-size: 0.95rem;
   font-weight: 600;
+  color:white
+}
+
+.tm-product-name:hover{
+  color:grey;
 }
 .tm-product-delete-icon {
   font-size: 1.1rem;
