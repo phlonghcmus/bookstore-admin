@@ -24,7 +24,7 @@ exports.delete= async(req, res, next) =>
     const products = await productsModel.list();
     res.render('products/list', {products});
 };
-exports.add= async(req, res, next) =>
+exports.addPage= async(req, res, next) =>
 {
     res.render('products/add', {});
 };
@@ -61,3 +61,24 @@ exports.update=async(req, res, next) =>
     const products = await productsModel.list();
     res.redirect('/products/'+ req.params.id);
 }
+
+exports.add= async(req, res, next) =>
+{
+    let cover;
+    cover = req.file.destination + req.file.filename;
+    path = cover.split('/').slice(1).join('/');
+    path2 = "/";
+    cover = path2.concat(path);
+    console.log(req.file);
+    const item = {
+        title:req.body.title,
+        detail:req.body.detail,
+        cover:cover,
+        author:req.body.author,
+        basePrice:req.body.price,
+        gerne:req.body.gerne
+    };
+    await productsModel.add(item);
+    const products = await productsModel.list();
+    res.redirect('/products');
+};

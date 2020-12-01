@@ -16,6 +16,8 @@ router.get('/', productsController.list);
 
 router.get('/:id',productsController.detail);
 router.get('/:id/delete',productsController.delete);
-router.get('/add/add-product',productsController.add);
+router.get('/add/add-product',productsController.addPage);
 router.post('/:id/update',upload.single('avatar'),productsController.update);
+router.post('/', upload.single('avatar') ,productsController.add);
+
 module.exports = router;

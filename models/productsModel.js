@@ -21,3 +21,10 @@ exports.update=async(id,data)=>{
     const productCollection=db().collection('books');
     await productCollection.updateOne({ _id: ObjectId(id) }, {$set: data}, function (err, results) {});
 }
+
+exports.add=async(item)=>{
+    const productCollection=db().collection('books');
+    await productCollection.insertOne(item, function (err, results) {
+        console.log("Item added");
+    });
+}
