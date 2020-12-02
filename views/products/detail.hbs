@@ -64,10 +64,9 @@
                                         class="custom-select tm-select-accounts"
                                         id="category"
                                 >
-                                    <option>Chọn Nhãn</option>
-                                    <option value="1" selected>Nhãn 1</option>
-                                    <option value="2">Nhãn 2</option>
-                                    <option value="3">Nhãn 3</option>
+                                {{#each categories}}
+                                    <option>{{category_name}}</option>
+                                {{/each}}
                                 </select>
                             </div>
                             <div class="row">
