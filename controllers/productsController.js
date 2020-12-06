@@ -1,6 +1,9 @@
 const productsModel = require('../models/productsModel');
 const categoriesModel = require('../models/categoriesModel');
 const toQS = require('querystring').stringify;
+const ObjectId= require('mongodb').ObjectId;
+
+
 exports.list = async (req, res, next) => {
     let currentPage=req.query.p || 1;
     let products;
@@ -34,23 +37,38 @@ exports.detail= async(req, res, next) =>
     const author=tt.author;
     const id=tt._id;
     const categories = await categoriesModel.list();
-    res.render('products/detail',{title,detail,basePrice,cover,stock,author,id,categories});
+    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,sold,id});
 };
 exports.delete= async(req, res, next) =>
 {
-    await productsModel.delete(req.params.id);
-    const products = await productsModel.list();
-    res.render('products/list', {products});
+    const data = {
+        remove : true,
+    }
+    await productsModel.delete(req.params.id,data);
+    res.redirect("/products");
 };
+
+exports.restore= async(req, res, next) =>
+{
+    const data = {
+        remove : false,
+    }
+    await productsModel.restore(req.params.id,data);
+    res.redirect("/products");
+};
+
 exports.addPage= async(req, res, next) =>
 {
-    res.render('products/add', {});
+    const categories = await categoriesModel.list();
+    res.render('products/add', {categories});
 };
 
 exports.update=async(req, res, next) =>
 {
     let cover;
     let data;
+    const tt = await categoriesModel.get(req.body.category);
+    const id =  tt._id;
     if(req.file)
     {
         cover=req.file.destination + req.file.filename;
@@ -59,20 +77,30 @@ exports.update=async(req, res, next) =>
         cover=path2.concat(path);
         console.log(req.file);
         data={
-        title:req.body.name,
-        basePrice: req.body.price,
-        author: req.body.author,
-        detail: req.body.detail,
-        cover:cover
+            title: req.body.title,
+            nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+            detail: req.body.detail,
+            cover: cover,
+            author: req.body.author,
+            basePrice: req.body.price,
+            category: req.body.category,
+            categoryID: ObjectId(id.toHexString()),
+            sold: parseInt(req.body.sold),
+            stock: parseInt(req.body.stock),
         }
     }
     else
     {
         data={
-        title:req.body.name,
-        basePrice: req.body.price,
-        author: req.body.author,
-        detail: req.body.detail,
+            title: req.body.title,
+            nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+            detail: req.body.detail,
+            author: req.body.author,
+            basePrice: req.body.price,
+            category: req.body.category,
+            categoryID: ObjectId(id.toHexString()),
+            sold: parseInt(req.body.sold),
+            stock: parseInt(req.body.stock),
         }
     }    
     await productsModel.update(req.params.id,data);
@@ -83,6 +111,8 @@ exports.add= async(req, res, next) =>
 {
     let cover;
     let item;
+    const tt = await categoriesModel.get(req.body.category);
+    const id =  tt._id;
     if(req.file) {
         cover = req.file.destination + req.file.filename;
         path = cover.split('/').slice(1).join('/');
@@ -91,26 +121,36 @@ exports.add= async(req, res, next) =>
         console.log(req.file);
         item = {
             title: req.body.title,
+            nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
             detail: req.body.detail,
             cover: cover,
             author: req.body.author,
             basePrice: req.body.price,
-            gerne: req.body.gerne
+            category: req.body.category,
+            categoryID: ObjectId(id.toHexString()),
+            sold: parseInt(req.body.sold),
+            stock: parseInt(req.body.stock),
+            remove: false,
         };
     }
     else
     {
         item={
             title: req.body.title,
+            nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
             detail: req.body.detail,
             author: req.body.author,
             basePrice: req.body.price,
-            gerne: req.body.gerne
+            category: req.body.category,
+            categoryID: ObjectId(id.toHexString()),
+            sold: parseInt(req.body.sold),
+            stock: parseInt(req.body.stock),
+            remove: false,
         };
     }
     await productsModel.add(item);
 
-    res.redirect('/products');
+    res.redirect("/products");
 };
 
 

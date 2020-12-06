@@ -16,7 +16,8 @@ const upload = multer({ dest: 'public/uploads/' ,fileFilter: function (req, file
 router.get('/',AuthMiddleWare, productsController.list);
 
 router.get('/detail/:id',AuthMiddleWare,productsController.detail);
-router.get('/:id/delete',AuthMiddleWare,productsController.delete);
+router.post('/detail/:id/delete',AuthMiddleWare,productsController.delete);
+router.post('/detail/:id/restore',AuthMiddleWare,productsController.restore);
 router.get('/add',AuthMiddleWare,productsController.addPage);
 router.post('/detail/:id/update',AuthMiddleWare,upload.single('avatar'),productsController.update);
 router.post('/add',AuthMiddleWare,upload.single('avatar') ,productsController.add);

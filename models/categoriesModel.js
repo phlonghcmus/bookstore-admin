@@ -6,3 +6,10 @@ exports.list = async () => {
     categories=await categoryCollection.find().toArray();
     return categories;
 };
+
+//Lấy Category theo tên
+exports.get=async(categoryName)=>{
+    const categoryCollection=db().collection('categories');
+    const category= await categoryCollection.findOne({category_name : categoryName});
+    return category;
+}

@@ -10,10 +10,15 @@ exports.get=async(id)=>{
 }
 
 // Xóa sách
-exports.delete=async(id)=>{
+exports.delete=async(id,data)=>{
     const productCollection=db().collection('books');
-    await productCollection.deleteOne({ _id: ObjectId(id) }, function (err, results) {});
+    await productCollection.updateOne({ _id: ObjectId(id) }, {$set: data}, function (err, results) {});
+}
 
+//Khôi phục sách
+exports.restore=async(id,data)=>{
+    const productCollection=db().collection('books');
+    await productCollection.updateOne({ _id: ObjectId(id) }, {$set: data}, function (err, results) {});
 }
 
 // Update sách

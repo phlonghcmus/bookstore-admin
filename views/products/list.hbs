@@ -20,16 +20,11 @@
                 {{#each products}}
                 <tbody>
                   <tr>
-                    <th scope="row"><input type="checkbox" /></th>
+                    <th scope="row"></th>
                     <td ><a class="tm-product-name" href="/products/detail/{{_id}}">{{title}}</a></td>
                     <td>{{sold}}</td>
                     <td>{{stock}}</td>
                     <td>{{basePrice}}</td>
-                    <td>
-                      <a href="/products/{{_id}}/delete" class="tm-product-delete-link">
-                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                      </a>
-                    </td>
                   </tr>     
                 </tbody>
                 {{/each}}
