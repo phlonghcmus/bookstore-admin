@@ -8,7 +8,12 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const port = process.env.PORT
+const paginate = require('handlebars-paginate');
 
+hbs.handlebars.registerHelper('paginate', paginate);
+hbs.registerHelper('json', function(context) {
+  return JSON.stringify(context);
+});
 require('dotenv').config();
 const AuthMiddleWare = require('./middleware/check-auth')
 const indexRouter = require('./routes/index');

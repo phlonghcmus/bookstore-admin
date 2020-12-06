@@ -93,7 +93,7 @@ button:focus {
   font-size: 1.1rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .nav-link {
   color: #fff;
@@ -426,7 +426,7 @@ input[type="checkbox"]:focus {
   min-height: 725px;
 }
 .tm-block-product-categories {
-  min-height: 650px;
+  min-height: 720px;
 }
 .tm-product-table-container {
   max-height: 465px;

@@ -1,0 +1,62 @@
+
+
+
+<div class="container mt-5">
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+                <div class="tm-product-table-container">
+                    <table class="table table-hover tm-table-small tm-product-table">
+                        <thead>
+                        <tr>
+                            <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/62d2399b89039bd1dc90ca2d50d3e802.png" class="shopee-search-empty-result-section__icon" style="width: 8.375rem;">
+                            <div style="color:white;">Không tìm thấy sản phẩm nào</div>
+                        </tr>
+                        </thead>
+
+                    </table>
+                </div>
+                <!-- table container -->
+
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+                <form method="get" onsubmit="return formSubmit(this)">
+                    <input type="text"  style="margin-bottom: 30px;"name="keyword" >
+                    <button type="submit">search</button>
+                </form>
+
+                <h2 class="tm-block-title">Nhãn Sách</h2>
+                <div class="tm-product-table-container">
+                    <table class="table tm-table-small tm-product-table">
+                        {{#each categories}}
+                            <tbody>
+                            <tr>
+                                <td class="tm-product-name">
+                                    <a class="category-link"href="/products/category/{{_id}}">{{category_name}}</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="tm-product-delete-link">
+                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {{/each}}
+                    </table>
+                </div>
+                <!-- table container -->
+                <button class="btn btn-primary btn-block text-uppercase mb-3">
+                    Add new category
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+</script>
