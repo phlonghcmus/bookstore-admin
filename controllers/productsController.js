@@ -2,6 +2,7 @@ const productsModel = require('../models/productsModel');
 const categoriesModel = require('../models/categoriesModel');
 const toQS = require('querystring').stringify;
 const ObjectId= require('mongodb').ObjectId;
+var fs = require('fs');
 
 
 exports.list = async (req, res, next) => {
@@ -67,13 +68,21 @@ exports.update=async(req, res, next) =>
 {
     let cover;
     let data;
+    const item = await productsModel.get(req.params.id);
+    let oldCover = item.cover;
+    if(oldCover){
+        oldCover = oldCover.split('/').slice(2);
+        path = '/';
+        const oldCoverPath = req.file.destination + path.concat(oldCover); 
+        fs.unlinkSync(oldCoverPath);
+    }
     const tt = await categoriesModel.get(req.body.category);
     const id =  tt._id;
     if(req.file)
     {
         cover=req.file.destination + req.file.filename;
         path=cover.split('/').slice(1).join('/');
-        path2="https://bookstoremanage.herokuapp.com/";
+        path2="/";
         cover=path2.concat(path);
         console.log(req.file);
         data={
@@ -116,7 +125,7 @@ exports.add= async(req, res, next) =>
     if(req.file) {
         cover = req.file.destination + req.file.filename;
         path = cover.split('/').slice(1).join('/');
-        path2 = "https://bookstoremanage.herokuapp.com/";
+        path2 = "/";
         cover = path2.concat(path);
         console.log(req.file);
         item = {
