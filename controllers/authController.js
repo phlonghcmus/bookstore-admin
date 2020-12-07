@@ -12,4 +12,8 @@ exports.login = (req, res) => {
         res.cookie('id',accessToken,{maxAge: 1000 * 60 * 60});
         res.redirect('dashboard');
     }
+    else
+    {
+        res.render('index/login', {thongbao: "Tài Khoản Hoặc Mật Khẩu Không Đúng"})
+    }
 }

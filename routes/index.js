@@ -8,4 +8,5 @@ const AuthMiddleWare = require('../middleware/check-auth.js')
 router.get('/', homeController.login);
 router.get('/dashboard',AuthMiddleWare,homeController.dashboard);
 router.post('/login',authController.login);
+router.get('/logout',AuthMiddleWare,homeController.logout);
 module.exports = router;

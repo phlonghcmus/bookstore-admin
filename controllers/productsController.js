@@ -23,7 +23,7 @@ exports.list = async (req, res, next) => {
     const count=products.length;
     const categories=await categoriesModel.list();
     // Pass data to view to display list of books
-    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 };
 
 exports.detail= async(req, res, next) =>
@@ -38,7 +38,7 @@ exports.detail= async(req, res, next) =>
     const author=tt.author;
     const id=tt._id;
     const categories = await categoriesModel.list();
-    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,sold,id});
+    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,sold,id,admin : "Admin,",logout: "Logout"});
 };
 exports.delete= async(req, res, next) =>
 {
@@ -174,7 +174,7 @@ exports.category=async(req,res,next)=>
     const count=products.length;
     // Pass data to view to display list of books
     const categories=await categoriesModel.list();
-    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.bin=async (req,res,next)=>
@@ -196,7 +196,7 @@ exports.bin=async (req,res,next)=>
     const count=products.length;
     const categories=await categoriesModel.list();
     // Pass data to view to display list of books
-    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.search=async(req,res,next)=>
@@ -223,9 +223,9 @@ exports.search=async(req,res,next)=>
     // Pass data to view to display list of products
     const categories=await categoriesModel.list();
     if(count===0)
-        res.render('products/noList',{count,categories});
+        res.render('products/noList',{count,categories,admin : "Admin,",logout: "Logout"});
     else
-        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.categorySearch=async (req,res,next)=>
@@ -254,9 +254,9 @@ exports.categorySearch=async (req,res,next)=>
     const categories=await categoriesModel.list();
 
     if(count===0)
-        res.render('products/noList',{count,categories});
+        res.render('products/noList',{count,categories,admin : "Admin,",logout: "Logout"});
     else
-        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.binSearch=async (req,res,next)=>
@@ -285,7 +285,7 @@ exports.binSearch=async (req,res,next)=>
     const categories=await categoriesModel.list();
 
     if(count===0)
-        res.render('products/noList',{count,categories});
+        res.render('products/noList',{count,categories,admin : "Admin,",logout: "Logout"});
     else
-        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)}});
+        res.render('products/list', {products,count,categories,query:newQuery,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
