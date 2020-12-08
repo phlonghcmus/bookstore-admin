@@ -69,20 +69,25 @@ exports.update=async(req, res, next) =>
     let cover;
     let data;
     const item = await productsModel.get(req.params.id);
-    let oldCover = item.cover;
-    if(oldCover){
-        oldCover = oldCover.split('/').slice(2);
-        path = '/';
-        const oldCoverPath = req.file.destination + path.concat(oldCover); 
-        fs.unlinkSync(oldCoverPath);
-    }
+    
     const tt = await categoriesModel.get(req.body.category);
     const id =  tt._id;
     if(req.file)
     {
+
+    	let oldCover = item.cover;
+    	if(oldCover)
+    	{
+        	oldCover = oldCover.split('/').slice(2);
+        	const path = '/';
+        	const oldCoverPath = req.file.destination + path.concat(oldCover); 
+        	if(fs.existsSync(oldCoverPath))
+        		fs.unlinkSync(oldCoverPath);
+    	}
+
         cover=req.file.destination + req.file.filename;
-        path=cover.split('/').slice(1).join('/');
-        path2="/";
+        const path=cover.split('/').slice(1).join('/');
+        const path2="/";
         cover=path2.concat(path);
         console.log(req.file);
         data={
