@@ -1,20 +1,15 @@
 const jwt = require('jsonwebtoken');
-exports.login = async(req, res, next) => {
-    try{
-        const token = req.cookies['id'];
-        const decoded = await jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
-        req.userData=decoded;
-        console.log("alo");
-        res.redirect('dashboard');
-    } catch(error)
-    {
+exports.login = async(req, res, next) => 
+{
+    if (!req.user)
         res.render('index/login', {});
-    }
+    else
+        res.redirect('/dashboard');
 };
 exports.dashboard = (req, res) => {
-    res.render('index/body', {admin : "Admin,",logout: "Logout"});
+        res.render('index/body', {admin : "Admin,",logout: "Logout"});
 };
 exports.logout = (req, res) => {
-    res.cookie('id',"");
+    req.logout();
     res.redirect('/');
 };

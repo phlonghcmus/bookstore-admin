@@ -15,7 +15,8 @@ hbs.registerHelper('json', function(context) {
   return JSON.stringify(context);
 });
 require('dotenv').config();
-const AuthMiddleWare = require('./middleware/check-auth')
+const passport = require('passport');
+const AuthMiddleWare = require('./middleware/check-auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
@@ -32,7 +33,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public/')));
+//Passport middlewware
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(function (req,res,next)
+{
+  res.locals.user=req.user;
+  next()
+})
 app.use('/', indexRouter);
 app.use('/dashboard', indexRouter);
 app.use('/products', productsRouter);
