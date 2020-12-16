@@ -216,17 +216,21 @@ thead {
   border-radius: 50%;
   margin-top: -3px;
 }
-.moving {
+.received {
   background-color: #9be64d;
   box-shadow: 0 0 8px #9be64d, inset 0 0 8px #9be64d;
 }
-.pending {
+.moving {
   background-color: #efc54b;
   box-shadow: 0 0 8px #efc54b, inset 0 0 8px #efc54b;
 }
 .cancelled {
   background-color: #da534f;
   box-shadow: 0 0 8px #da534f, inset 0 0 8px #da534f;
+}
+.delivered {
+  background-color: #0084FF;
+  box-shadow: 0 0 8px #0084FF, inset 0 0 8px #0084FF;
 }
 .tm-avatar {
   width: 345px;

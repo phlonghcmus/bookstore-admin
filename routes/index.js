@@ -6,7 +6,6 @@ const checkAuth = require('../middleware/check-auth.js');
 const passport =require ('../passport/index.js');
 
 router.get('/', homeController.login);
-router.get('/orders',checkAuth,homeController.orders);
 router.post('/login',passport.authenticate('local', { successRedirect: '/orders',failWithError: true}),
 function(err, req, res, next) {
     return res.render('index/login', {thongbao: "Tài khoản hoặc mật khẩu không đúng"});
