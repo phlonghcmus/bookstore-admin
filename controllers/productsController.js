@@ -3,6 +3,8 @@ const categoriesModel = require('../models/categoriesModel');
 const toQS = require('querystring').stringify;
 const ObjectId= require('mongodb').ObjectId;
 var fs = require('fs');
+const cloudinary = require('cloudinary');
+require('../handlers/cloudinary')
 
 
 exports.list = async (req, res, next) => {
@@ -37,24 +39,32 @@ exports.detail= async(req, res, next) =>
     const sold=tt.sold;
     const author=tt.author;
     const id=tt._id;
+    const category=tt.category;
     const categories = await categoriesModel.list();
-    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,sold,id,admin : "Admin,",logout: "Logout"});
+    const index = categories.findIndex(item=>item.category_name===category);
+    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,category,sold,id,admin : "Admin,",logout: "Logout"});
 };
 exports.delete= async(req, res, next) =>
 {
-    const data = {
-        remove : true,
+    const tt= await productsModel.get(req.params.id);
+    if(!tt.remove){
+        const data = {
+            remove : true,
+        }
+        await productsModel.delete(req.params.id,data);
     }
-    await productsModel.delete(req.params.id,data);
     res.redirect("/products");
 };
 
 exports.restore= async(req, res, next) =>
 {
-    const data = {
-        remove : false,
+    const tt= await productsModel.get(req.params.id);
+    if(tt.remove){
+        const data = {
+            remove : false,
+        }
+        await productsModel.delete(req.params.id,data);
     }
-    await productsModel.restore(req.params.id,data);
     res.redirect("/products");
 };
 
@@ -66,35 +76,40 @@ exports.addPage= async(req, res, next) =>
 
 exports.update=async(req, res, next) =>
 {
-    let cover;
+    let coverPath;
     let data;
     const item = await productsModel.get(req.params.id);
-    
     const tt = await categoriesModel.get(req.body.category);
     const id =  tt._id;
     if(req.file)
     {
-
-    	let oldCover = item.cover;
-    	if(oldCover)
+        let cover = await cloudinary.v2.uploader.upload(req.file.path);
+        let oldCoverId = item.cover_id;
+        if(oldCoverId){
+            let result = await cloudinary.v2.uploader.destroy(oldCoverId);
+            console.log(result);
+        }
+        let oldPath = item.coverPath;
+    	if(oldPath)
     	{
-        	oldCover = oldCover.split('/').slice(2);
+        	oldPath = oldPath.split('/').slice(2);
         	const path = '/';
-        	const oldCoverPath = req.file.destination + path.concat(oldCover); 
+        	const oldCoverPath = req.file.destination + path.concat(oldPath); 
         	if(fs.existsSync(oldCoverPath))
         		fs.unlinkSync(oldCoverPath);
-    	}
-
-        cover=req.file.destination + req.file.filename;
-        const path=cover.split('/').slice(1).join('/');
-        const path2="/";
-        cover=path2.concat(path);
+        }
+        coverPath = req.file.destination + req.file.filename;
+        path = coverPath.split('/').slice(1).join('/');
+        path2 = "/";
+        coverPath = path2.concat(path);
         console.log(req.file);
         data={
             title: req.body.title,
             nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
             detail: req.body.detail,
-            cover: cover,
+            cover: cover.secure_url,
+            cover_id: cover.public_id,
+            coverPath: coverPath,
             author: req.body.author,
             basePrice: req.body.price,
             category: req.body.category,
@@ -123,21 +138,24 @@ exports.update=async(req, res, next) =>
 
 exports.add= async(req, res, next) =>
 {
-    let cover;
+    let coverPath;
     let item;
     const tt = await categoriesModel.get(req.body.category);
     const id =  tt._id;
     if(req.file) {
-        cover = req.file.destination + req.file.filename;
-        path = cover.split('/').slice(1).join('/');
+        let cover = await cloudinary.v2.uploader.upload(req.file.path);
+        coverPath = req.file.destination + req.file.filename;
+        path = coverPath.split('/').slice(1).join('/');
         path2 = "/";
-        cover = path2.concat(path);
+        coverPath = path2.concat(path);
         console.log(req.file);
         item = {
             title: req.body.title,
             nonAccentTitle: req.body.title.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
             detail: req.body.detail,
-            cover: cover,
+            cover: cover.secure_url,
+            cover_id: cover.public_id,
+            coverPath: coverPath,
             author: req.body.author,
             basePrice: req.body.price,
             category: req.body.category,

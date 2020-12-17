@@ -1,0 +1,67 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Chi Tiết Tài Khoản</h2>
+                    </div>
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
+                            <div class="form-group mb-3">
+                                <label style="font-size: larger;">Username</label>
+                                <p style="padding: 10px; border: 2px solid white; color: white;">{{account}}</p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label style="font-size: larger;">Họ Tên</label>
+                                <p style="padding: 10px; border: 2px solid white; color: white;">{{firstName}} {{lastName}}</p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label style="font-size: larger;">Email</label>
+                                <p style="padding: 10px; border: 2px solid white; color: white;">{{email}}</p>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label style="font-size: larger;">Địa chỉ</label>
+                                <p style="padding: 10px; border: 2px solid white; color: white;">{{location}}</p>
+                            </div>
+                            <div class="row">
+                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                    <label style="font-size: larger;">Điện Thoại Di Động</label>
+                                    <p style="padding: 10px; border: 2px solid white; color: white;">{{mobile}}</p>
+                                </div>
+                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                    <label style="font-size: larger;">Điện Thoại Bàn</label>
+                                    <p style="padding: 10px; border: 2px solid white; color: white;">{{phone}}</p>
+                                </div>
+                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                    <label style="font-size: larger;">Giới Tính</label>
+                                    <p style="padding: 10px; border: 2px solid white; color: white;">{{gender}}</p>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                        <div class="tm-product-img-edit mx-auto">
+                            <img src="{{cover}}" alt="Ảnh Sản Phẩm" class="avatar img-fluid d-block mx-auto">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="/users/userDetail/{{id}}/lock" class="tm-edit-product-form">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Khóa Tài Khoản</button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="/users/userDetail/{{id}}/unlock" class="tm-edit-product-form">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Mở Khóa Tài Khoản</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

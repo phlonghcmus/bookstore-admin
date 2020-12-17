@@ -1,0 +1,68 @@
+<div class="container mt-5">
+      <div class="row tm-content-row">
+        <div class="col-xl-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-products">
+             <form method="get" onsubmit="return formSubmit(this)">
+                  <input type="text"  style="margin-bottom: 30px; width: 500px;"name="keyword" >
+                  <button type="submit">search</button>
+              </form>
+            <div class="tm-product-table-container">
+              <table class="table table-hover tm-table-small tm-product-table">
+                <thead>
+                  <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Tên chủ tài khoản</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                {{#each users}}
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td ><a class="tm-product-name" href="/users/userDetail/{{_id}}">{{account}}</a></td>
+                    <td>{{firstName}} {{lastName}}</td>
+                    <td>{{email}}</td>
+                  </tr>     
+                </tbody>
+                {{/each}}
+              </table>
+            </div>
+            <!-- table container -->
+
+              <a href="/users/recycle-bin" class="btn btn-primary btn-block text-uppercase mb-3">Tài khoản bị khóa</a>
+              <div class="paginate-center">
+                  <ul class="paginate-center-ul">
+                      {{#paginate pagination type="first"}}
+                          <li {{#if disabled}}class="li-paginate" {{/if}} style="float:left;"class="li-paginate" >
+                              <a  href="?{{../query}}p={{n}}"><<</a>
+                          </li>
+                      {{/paginate}}
+                      {{#paginate pagination type="previous"}}
+                          <li {{#if disabled}}class="li-paginate" {{/if}}style="float:left;" class="li-paginate">
+                              <a href="?{{../query}}p={{n}}"><</a>
+                          </li>
+                      {{/paginate}}
+                      {{#paginate pagination type="middle" limit="5"}}
+                          <li {{#if active}} class=" activate" {{/if}} style="float:left;" class="li-paginate" >
+                              <a href="?{{../query}}p={{n}}">{{n}}</a>
+                          </li>
+                      {{/paginate}}
+                      {{#paginate pagination type="next"}}
+                          <li {{#if disabled}}class="li-paginate"   {{/if}}style="float:left;" class="li-paginate">
+                              <a href="?{{../query}}p={{n}}">>
+                              </a>
+                          </li>
+                      {{/paginate}}
+                      {{#paginate pagination type="last"}}
+                          <li {{#if disabled}}class="li-paginate"  {{/if}}style="float:left;"class="li-paginate">
+                              <a  href="?{{../query}}p={{n}}">>></a>
+                          </li>
+                      {{/paginate}}
+                  </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>
