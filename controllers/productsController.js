@@ -89,19 +89,9 @@ exports.update=async(req, res, next) =>
             let result = await cloudinary.v2.uploader.destroy(oldCoverId);
             console.log(result);
         }
-        let oldPath = item.coverPath;
-    	if(oldPath)
-    	{
-        	oldPath = oldPath.split('/').slice(2);
-        	const path = '/';
-        	const oldCoverPath = req.file.destination + path.concat(oldPath); 
-        	if(fs.existsSync(oldCoverPath))
-        		fs.unlinkSync(oldCoverPath);
-        }
         coverPath = req.file.destination + req.file.filename;
-        path = coverPath.split('/').slice(1).join('/');
-        path2 = "/";
-        coverPath = path2.concat(path);
+        if(fs.existsSync(coverPath))
+        	fs.unlinkSync(coverPath);
         console.log(req.file);
         data={
             title: req.body.title,
@@ -109,7 +99,6 @@ exports.update=async(req, res, next) =>
             detail: req.body.detail,
             cover: cover.secure_url,
             cover_id: cover.public_id,
-            coverPath: coverPath,
             author: req.body.author,
             basePrice: req.body.price,
             category: req.body.category,
@@ -145,9 +134,8 @@ exports.add= async(req, res, next) =>
     if(req.file) {
         let cover = await cloudinary.v2.uploader.upload(req.file.path);
         coverPath = req.file.destination + req.file.filename;
-        path = coverPath.split('/').slice(1).join('/');
-        path2 = "/";
-        coverPath = path2.concat(path);
+        if(fs.existsSync(coverPath))
+        	fs.unlinkSync(coverPath);
         console.log(req.file);
         item = {
             title: req.body.title,
@@ -155,7 +143,6 @@ exports.add= async(req, res, next) =>
             detail: req.body.detail,
             cover: cover.secure_url,
             cover_id: cover.public_id,
-            coverPath: coverPath,
             author: req.body.author,
             basePrice: req.body.price,
             category: req.body.category,
