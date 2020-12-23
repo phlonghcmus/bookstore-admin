@@ -20,17 +20,21 @@
                             {{#each orders}}
                             <tbody>
                                 <tr>
-                                    <th scope="row"><b>{{_id}}</b></th>
+                                    <th scope="row"><a href="/orders/orderDetail/{{_id}}">{{_id}}</a></th>
                                     <td>
                                         {{#compare status 1}}
                                             <div class="tm-status-circle received">
                                             </div>Đã Tiếp Nhận
                                         {{/compare}}
                                         {{#compare status 2}}
+                                            <div class="tm-status-circle wrapping">
+                                            </div>Đang Gói Hàng
+                                        {{/compare}}
+                                        {{#compare status 3}}
                                             <div class="tm-status-circle moving">
                                             </div>Đang Giao Hàng
                                         {{/compare}}
-                                        {{#compare status 3}}
+                                        {{#compare status 5}}
                                             <div class="tm-status-circle cancelled">
                                             </div>Đã Hủy
                                         {{/compare}}
@@ -39,7 +43,7 @@
                                             </div>Đã Giao
                                         {{/compare}}
                                     </td>
-                                    <td><b>{{mail}}</b></td>
+                                    <td><b>{{email}}</b></td>
                                     <td><b>{{place}}</b></td>
                                     <td>{{order_date}}</td>
                                 </tr>

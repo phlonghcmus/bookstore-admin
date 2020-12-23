@@ -217,10 +217,15 @@ thead {
   margin-top: -3px;
 }
 .received {
+  background-color: #0084FF;
+  box-shadow: 0 0 8px #0084FF, inset 0 0 8px #0084FF;
+}
+.moving {
   background-color: #9be64d;
   box-shadow: 0 0 8px #9be64d, inset 0 0 8px #9be64d;
 }
-.moving {
+.wrapping
+{
   background-color: #efc54b;
   box-shadow: 0 0 8px #efc54b, inset 0 0 8px #efc54b;
 }
@@ -229,8 +234,8 @@ thead {
   box-shadow: 0 0 8px #da534f, inset 0 0 8px #da534f;
 }
 .delivered {
-  background-color: #0084FF;
-  box-shadow: 0 0 8px #0084FF, inset 0 0 8px #0084FF;
+  background-color: gray;
+  box-shadow: 0 0 8px gray, inset 0 0 8px gray;
 }
 .tm-avatar {
   width: 345px;

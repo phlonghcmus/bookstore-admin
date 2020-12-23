@@ -1,0 +1,55 @@
+<div class="container">
+            <div class="row" style="margin-left: 5%">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5">Đơn Hàng, <b>{{order._id}}</b></p>
+                </div>
+            </div>
+             <div class="col-12 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                    <h1 class="tm-block-title" style="color: red;">Chi Tiết Đơn Hàng</h1>
+                    {{#compare order.status 1}}
+                        <h2 class="tm-block-title">Trạng Thái Đơn Hàng: Đã tiếp nhận</h2>
+                        <form action="/orders/orderDetail/{{order._id}}/cancel" method="POST" style="float: left;"><button type="submit">Hủy Đơn Hàng</button></form>
+                        <form action="/orders/orderDetail/{{order._id}}/next" method="POST" style="float: left;"><button type="submit">Chuyển Trạng Thái Kế Tiếp</button></form>
+                    {{/compare}}
+                     {{#compare order.status 2}}
+                        <h2 class="tm-block-title">Trạng Thái Đơn Hàng: Đang gói hàng</h2>
+                        <form action="/orders/orderDetail/{{order._id}}/cancel" method="POST" style="float: left;"><button type="submit">Hủy Đơn Hàng</button></form>
+                        <form action="/orders/orderDetail/{{order._id}}/next" method="POST" style="float: left;"><button type="submit">Chuyển Trạng Thái Kế Tiếp</button></form>
+                    {{/compare}}
+                    {{#compare order.status 3}}
+                        <h2 class="tm-block-title">Trạng Thái Đơn Hàng: Đang giao hàng</h2>
+                        <form action="/orders/orderDetail/{{order._id}}/cancel" method="POST" style="float: left;"><button type="submit">Hủy Đơn Hàng</button></form>
+                        <form action="/orders/orderDetail/{{order._id}}/next" method="POST" style="float: left;"><button type="submit">Chuyển Trạng Thái Kế Tiếp</button></form>
+                    {{/compare}}
+                    {{#compare order.status 4}}
+                        <h2 class="tm-block-title">Trạng Thái Đơn Hàng: Đã giao</h2>
+                    {{/compare}}
+                    {{#compare order.status 5}}
+                        <h2 class="tm-block-title">Trạng Thái Đơn Hàng: Đã hủy</h2>
+                    {{/compare}}
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">ID SÁCH</th>
+                                <th scope="col">TÊN SÁCH</th>
+                                <th scope="col">SỐ LƯỢNG</th>
+                                <th scope="col">ĐƠN GIÁ</th>
+                            </tr>
+                        </thead>
+                        {{#each order.books_detail}}
+                        <tbody>
+                            <tr>
+                                <th scope="row"><b>{{book_id}}<b></th>
+                                <td><b>{{title}}</b></td>
+                                <td><b>{{quantity}}</b></td>
+                                <td><b>{{basePrice}}</b></td>
+                            </tr>
+                        </tbody>
+                        {{/each}}
+                    </table>
+                    <div  style="float: right;margin-top:10px;font-weight:bold;color:white">{{total}} VND</div>
+                    <div style="float: right;color:red;margin-top:10px;margin-right:5px;font-weight:bold">Tổng Tiền Đơn Hàng</div>
+                </div>
+            </div>
+</div>
