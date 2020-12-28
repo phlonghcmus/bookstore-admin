@@ -1,0 +1,43 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<div class="container tm-bg-primary-dark">
+    <div class="row">
+        <div class="col">
+            <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+        </div>
+    </div>
+    <!-- row -->
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block">
+                <h2 style="text-align:center;" class="tm-block-title">BIỂU ĐỒ DOANH THU QUÝ NĂM {{year_system}}</h2>
+                <canvas style="margin-top:10px;margin-right: auto;margin-left:auto;display:block" id="myChart"></canvas>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <script>
+        let myChart= document.getElementById('myChart').getContext('2d');
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = 'white';
+        let massPopChart = new Chart(myChart,{
+            type:'bar',
+            data:{
+                labels:['QUÝ 1','QUÝ 2','QUÝ 3','QUÝ 4'],
+                datasets:[{
+                    label:'DOANH THU(VND)',
+                    data:[
+                     {{value.[1]}},{{value.[2]}},{{value.[3]}},{{value.[4]}}
+                    ],
+                    backgroundColor :'blue',
+                    borderWidth:4,
+                    borderColor:'#777',
+                    hoverBorderWidth:3,
+                    hoverBorderColor:'#000'
+                }]
+            },
+            option:{}
+        });
+    </script>
+</div>

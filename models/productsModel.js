@@ -2,6 +2,12 @@ const {db}=require('../database/database');
 const ObjectId= require('mongodb').ObjectId;
 let products;
 
+exports.list=async()=>{
+    const productCollection=db().collection('books');
+    products=await productCollection.find().limit(10).sort({sold: -1}).toArray();
+    return products;
+}
+
 // lấy 1 quyển sách theo id
 exports.get=async(id)=>{
     const productCollection=db().collection('books');

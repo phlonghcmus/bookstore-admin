@@ -51,9 +51,10 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Daily Report</a>
-                                <a class="dropdown-item" href="#">Weekly Report</a>
-                                <a class="dropdown-item" href="#">Yearly Report</a>
+                                <a class="dropdown-item" href="/reports/precious">Báo Cáo Quý</a>
+                                <a class="dropdown-item" href="/reports/month">Báo Cáo Tháng</a>
+                                <a class="dropdown-item" href="/reports/year">Báo Cáo Năm</a>
+                                <a class="dropdown-item" href="/reports/top10">Báo Cáo Top 10 Sản Phẩm</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -106,7 +107,6 @@
             </div>
         </footer>
     </div>
-
     <script src="/js/jquery-3.3.1.min.js"></script>
     <!-- https://jquery.com/download/ -->
     <script src="/js/moment.min.js"></script>
@@ -116,33 +116,5 @@
     <script src="/js/bootstrap.min.js"></script>
     <!-- https://getbootstrap.com/ -->
     <script src="/js/tooplate-scripts.js"></script>
-
-    <script src="/js/custome.js"></script>
-    <script>
-        Chart.defaults.global.defaultFontColor = 'white';
-        let ctxLine,
-            ctxBar,
-            ctxPie,
-            optionsLine,
-            optionsBar,
-            optionsPie,
-            configLine,
-            configBar,
-            configPie,
-            lineChart;
-        barChart, pieChart;
-        // DOM is ready
-        $(function () {
-            drawLineChart(); // Line Chart
-            drawBarChart(); // Bar Chart
-            drawPieChart(); // Pie Chart
-
-            $(window).resize(function () {
-                updateLineChart();
-                updateBarChart();                
-            });
-        })
-    </script>
 </body>
-
 </html>
