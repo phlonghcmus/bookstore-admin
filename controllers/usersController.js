@@ -38,9 +38,9 @@ exports.detail= async(req, res, next) =>
 exports.lock= async(req, res, next) =>
 {
     const tt= await usersModel.get(req.params.id);
-    if(tt.active){
+    if(!tt.block){
         const data = {
-            active : false,
+            block : true,
         }
     await usersModel.lock(req.params.id,data);
     }
@@ -50,9 +50,9 @@ exports.lock= async(req, res, next) =>
 exports.unlock= async(req, res, next) =>
 {
     const tt= await usersModel.get(req.params.id);
-    if(!tt.active){
+    if(tt.block){
         const data = {
-            active : true,
+            block : false,
         }
     await usersModel.lock(req.params.id,data);
     }

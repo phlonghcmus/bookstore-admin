@@ -42,7 +42,6 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-file-alt"></i>
@@ -63,13 +62,20 @@
                                 Sản Phẩm
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-user"></i>
-                                Tài Khoản
+                                <span>
+                                    Tài Khoản <i class="fas fa-angle-down"></i>
+                                </span>
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/users">Tài Khoản Khách Hàng</a>
+                                <a class="dropdown-item" href="/admin">Tài Khoản Admin</a>
+                            </div>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -116,5 +122,6 @@
     <script src="/js/bootstrap.min.js"></script>
     <!-- https://getbootstrap.com/ -->
     <script src="/js/tooplate-scripts.js"></script>
+    <script src="/js/custome.js"></script>
 </body>
 </html>

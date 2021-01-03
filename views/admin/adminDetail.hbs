@@ -1,0 +1,107 @@
+<div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="tm-block-title d-inline-block">Chỉnh sửa tài khoản</h2>
+                    </div>
+                </div>
+                <div class="row tm-edit-product-row">
+                    <div class="col-xl-6 col-lg-6 col-md-12">
+                        <form action="/admin/update" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
+                            <div class="form-group mb-3">
+
+                                <label
+                                        for="user_name"
+                                >Username
+                                </label>
+                                <input
+                                        id="user_name"
+                                        name="user_name"
+                                        type="text"
+                                        value="{{user_name}}"
+                                        class="form-control validate"
+                                />
+                            </div>
+                            <div class="form-group mb-3">
+
+                                <label
+                                        for="fullName"
+                                >Họ Tên
+                                </label>
+                                <input
+                                        id="fullName"
+                                        name="fullName"
+                                        type="text"
+                                        value="{{fullName}}"
+                                        class="form-control validate"
+                                />
+                            </div>
+                            <div class="form-group mb-3">
+
+                                <label
+                                        for="email"
+                                >Email
+                                </label>
+                                <input
+                                        id="email"
+                                        name="email"
+                                        type="text"
+                                        value="{{email}}"
+                                        class="form-control validate"
+                                />
+                            </div>
+                            <div class="form-group mb-3">
+
+                                <label
+                                        for="phone"
+                                >Số điện thoại
+                                </label>
+                                <input
+                                        id="phone"
+                                        name="phone"
+                                        type="text"
+                                        value="{{phone}}"
+                                        class="form-control validate"
+                                />
+                            </div>
+                            <div class="form-group mb-3">
+
+                                <label
+                                        for="address"
+                                >Địa chỉ
+                                </label>
+                                <input
+                                        id="address"
+                                        name="address"
+                                        type="text"
+                                        value="{{address}}"
+                                        class="form-control validate"
+                                />
+                            </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                        <div class="tm-product-img-edit mx-auto">
+                            <img src="{{cover}}" alt="Ảnh Đại Diện" class="avatar img-fluid d-block mx-auto">
+
+                        </div>
+                        <div class="custom-file mt-3 mb-3">
+                            <input id="avatar" type="file" name="avatar"style="display:none;" class="file-upload">
+                             <input
+                                    type="button"
+                                    class="btn btn-primary btn-block mx-auto"
+                                    value="THAY ĐỔI ẢNH NỀN"
+                                    onclick="document.getElementById('avatar').click();"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Lưu chỉnh sửa</button>
+                    </div>
+                    </form>
+                </div>
+                <br>
+        </div>
+    </div>
+</div>

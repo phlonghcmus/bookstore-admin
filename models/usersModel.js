@@ -19,30 +19,30 @@ exports.unlock=async(id,data)=>{
 
 exports.listPerPage = async (currentPage) => {
     const userCollection= db().collection('user');
-    userCollection.createIndex({"active":1});
-    const users=await userCollection.find({"active":true}).limit(6).skip((currentPage-1)*6).toArray();
+    userCollection.createIndex({"block":1});
+    const users=await userCollection.find({"block":false}).limit(6).skip((currentPage-1)*6).toArray();
     return users;
 };
 
 exports.pageCountList= async()=>
 {
     const userCollection= db().collection('user');
-    const count=await userCollection.find({"active":true}).count();
+    const count=await userCollection.find({"block":false}).count();
     return count/6;
 }
 
 exports.binListPerPage = async (currentPage) => {
     const userCollection= db().collection('user');
-    userCollection.createIndex({"active":1});
+    userCollection.createIndex({"block":1});
 
-    const users=await userCollection.find({"active":false}).limit(6).skip((currentPage-1)*6).toArray();
+    const users=await userCollection.find({"block":true}).limit(6).skip((currentPage-1)*6).toArray();
     return users;
 };
 
 exports.binPageCountList= async()=>
 {
     const userCollection= db().collection('user');
-    const count=await userCollection.find({"active":false}).count();
+    const count=await userCollection.find({"block":true}).count();
     return count/6;
 }
 
@@ -51,7 +51,7 @@ exports.pageCountSearch=async(str)=>
     const userCollection= db().collection('user');
     let count=await userCollection.find({
         $and:[
-            {"active": true},
+            {"block":false},
             {"account": {"$regex": str, "$options": "i"}},
 
         ]}).count();
@@ -59,7 +59,7 @@ exports.pageCountSearch=async(str)=>
     if(count===0)
     count=await userCollection.find({
         $and:[
-            {"active": true},
+            {"block":false},
             {"firstName": {"$regex": str, "$options": "i"}}
 
         ]}).count();
@@ -67,7 +67,7 @@ exports.pageCountSearch=async(str)=>
     if(count===0)
     count=await userCollection.find({
         $and:[
-            {"active": true},
+            {"block":false},
             {"lastName": {"$regex": str, "$options": "i"}}
     
         ]}).count();
@@ -80,7 +80,7 @@ exports.searchPerPage=async(str,page)=>
     const userCollection= db().collection('user');
     let  users=await userCollection.find(
         {$and:[
-                {"active": true},
+                {"block":false},
                 {"account": {"$regex": str, "$options": "i"}}
 
             ]}).limit(6).skip((page-1)*6).toArray();
@@ -88,7 +88,7 @@ exports.searchPerPage=async(str,page)=>
     if(users.length===0)
         users=await userCollection.find(
             {$and:[
-                {"active": true},
+                {"block":false},
                 {"firstName": {"$regex": str, "$options": "i"}}
     
                 ]}).limit(6).skip((page-1)*6).toArray();
@@ -96,7 +96,7 @@ exports.searchPerPage=async(str,page)=>
     if(users.length===0)
         users=await userCollection.find(
             {$and:[
-                {"active": true},
+                {"block":false},
                 {"lastName": {"$regex": str, "$options": "i"}}
             
                 ]}).limit(6).skip((page-1)*6).toArray();
@@ -109,7 +109,7 @@ exports.pageCountBinSearch=async(id,str,page)=>
     const userCollection= db().collection('user');
     let count=await userCollection.find({
         $and:[
-            {"active": false},
+            {"block":true},
             {"account": {"$regex": str, "$options": "i"}},
 
         ]}).count();
@@ -117,7 +117,7 @@ exports.pageCountBinSearch=async(id,str,page)=>
     if(count===0)
     count=await userCollection.find({
         $and:[
-            {"active": false},
+            {"block":true},
             {"firstName": {"$regex": str, "$options": "i"}}
 
         ]}).count();
@@ -125,7 +125,7 @@ exports.pageCountBinSearch=async(id,str,page)=>
     if(count===0)
     count=await userCollection.find({
         $and:[
-            {"active": false},
+            {"block":true},
             {"lastName": {"$regex": str, "$options": "i"}}
     
         ]}).count();
@@ -138,7 +138,7 @@ exports.binSearchPerPage=async(id,str,page)=>
     const userCollection= db().collection('user');
     let  users=await userCollection.find(
         {$and:[
-                {"active": false},
+                {"block":true},
                 {"account": {"$regex": str, "$options": "i"}}
 
             ]}).limit(6).skip((page-1)*6).toArray();
@@ -146,7 +146,7 @@ exports.binSearchPerPage=async(id,str,page)=>
     if(users.length===0)
         users=await userCollection.find(
             {$and:[
-                {"active": false},
+                {"block":true},
                 {"firstName": {"$regex": str, "$options": "i"}}
     
                 ]}).limit(6).skip((page-1)*6).toArray();
@@ -154,7 +154,7 @@ exports.binSearchPerPage=async(id,str,page)=>
     if(users.length===0)
         users=await userCollection.find(
             {$and:[
-                {"active": false},
+                {"block":true},
                 {"lastName": {"$regex": str, "$options": "i"}}
             
                 ]}).limit(6).skip((page-1)*6).toArray();

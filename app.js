@@ -22,6 +22,7 @@ const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 const reportsRouter = require('./routes/reports');
+const adminRouter = require('./routes/admin');
 
 hbs.handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
 
@@ -89,6 +90,7 @@ app.use('/orders', ordersRouter);
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);
 app.use('/reports', reportsRouter);
+app.use('/admin', adminRouter);
 
 
 
