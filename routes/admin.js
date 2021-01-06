@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const checkAuth = require('../middleware/check-auth.js');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const multer  = require('multer')
 
 const upload = multer({ dest: 'public/uploads/' ,fileFilter: function (req, file, cb) {
@@ -11,7 +11,7 @@ const upload = multer({ dest: 'public/uploads/' ,fileFilter: function (req, file
     cb(null, true);
   }})
 
-router.get('/', checkAuth, adminController.detail);
-router.post('/update',checkAuth,upload.single('avatar'),adminController.update);
+router.get('/', ensureLoggedIn("/login"), adminController.detail);
+router.post('/update',ensureLoggedIn("/login"),upload.single('avatar'),adminController.update);
 
 module.exports = router;

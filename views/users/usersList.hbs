@@ -30,8 +30,12 @@
               </table>
             </div>
             <!-- table container -->
-
-              <a href="/users/recycle-bin" class="btn btn-primary btn-block text-uppercase mb-3">Tài khoản bị khóa</a>
+              {{#if block}}
+              <a href="/users/" class="btn btn-primary btn-block text-uppercase mb-3">Tài khoản hiện có</a>
+              {{else}}
+               <a href="/users/recycle-bin" class="btn btn-primary btn-block text-uppercase mb-3">Tài khoản bị khóa</a>
+              {{/if}}
+              {{#ifeg count 1}}
               <div class="paginate-center">
                   <ul class="paginate-center-ul">
                       {{#paginate pagination type="first"}}
@@ -62,6 +66,7 @@
                       {{/paginate}}
                   </ul>
               </div>
+              {{/ifeg}}
           </div>
         </div>
       </div>

@@ -32,7 +32,8 @@ exports.detail= async(req, res, next) =>
     const location=tt.location;
     const phone=tt.phone;
     const id=tt._id;
-    res.render('users/userDetail',{account,firstName,lastName,email,mobile,gender,cover,location,id,phone,admin : "Admin,",logout: "Logout"});
+    const block=tt.block;
+    res.render('users/userDetail',{account,firstName,lastName,email,mobile,gender,cover,location,id,phone,block,admin : "Admin,",logout: "Logout"});
 };
 
 exports.lock= async(req, res, next) =>
@@ -73,9 +74,9 @@ exports.bin=async (req,res,next)=>
     {
         req.query.p= 5 ||1;
     }
-
+    const block=true;
     const count=users.length;
-    res.render('users/usersList', {users,count,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
+    res.render('users/usersList', {users,count,block,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.search=async(req,res,next)=>

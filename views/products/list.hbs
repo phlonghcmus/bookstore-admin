@@ -32,8 +32,15 @@
             </div>
             <!-- table container -->
 
-            <a href="/products/add" class="btn btn-primary btn-block text-uppercase mb-3">Thêm Sách</a>
+            
+              {{#if remove}}
+              <a href="/products/" class="btn btn-primary btn-block text-uppercase mb-3">Sách trong kho</a>
+              
+              {{else}}
               <a href="/products/recycle-bin" class="btn btn-primary btn-block text-uppercase mb-3">Sách đã bị xóa</a>
+              <a href="/products/add" class="btn btn-primary btn-block text-uppercase mb-3">Thêm Sách</a>
+              {{/if}}
+              {{#ifeg count 1}}
               <div class="paginate-center">
                   <ul class="paginate-center-ul">
                       {{#paginate pagination type="first"}}
@@ -64,6 +71,7 @@
                       {{/paginate}}
                   </ul>
               </div>
+              {{/ifeg}}
           </div>
 
         </div>
@@ -83,11 +91,7 @@
                     <td class="tm-product-name">
                         <a class="category-link"href="/products/category/{{_id}}">{{category_name}}</a>
                     </td>
-                    <td class="text-center">
-                      <a href="#" class="tm-product-delete-link">
-                        <i class="far fa-trash-alt tm-product-delete-icon"></i>
-                      </a>
-                    </td>
+                    
                   </tr>
                 </tbody>
                 {{/each}}

@@ -42,7 +42,8 @@ exports.detail= async(req, res, next) =>
     const category=tt.category;
     const categories = await categoriesModel.list();
     const index = categories.findIndex(item=>item.category_name===category);
-    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,category,sold,id,admin : "Admin,",logout: "Logout"});
+    const remove=tt.remove;
+    res.render('products/detail',{title,detail,basePrice,cover,stock,author,categories,category,sold,id,remove,admin : "Admin,",logout: "Logout"});
 };
 exports.delete= async(req, res, next) =>
 {
@@ -205,8 +206,9 @@ exports.bin=async (req,res,next)=>
 
     const count=products.length;
     const categories=await categoriesModel.list();
+    const remove=true;
     // Pass data to view to display list of books
-    res.render('products/list', {products,count,categories,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
+    res.render('products/list', {products,count,categories,remove,pagination:{page:currentPage,pageCount:Math.ceil(pageCount)},admin : "Admin,",logout: "Logout"});
 }
 
 exports.search=async(req,res,next)=>

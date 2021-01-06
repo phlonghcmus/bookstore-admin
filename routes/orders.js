@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 const ordersController = require('../controllers/ordersController.js');
-const checkAuth = require('../middleware/check-auth.js');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const passport =require ('../passport/index.js');
 
-router.get('/',checkAuth,ordersController.list);
-router.get('/orderDetail/:id',checkAuth,ordersController.detail);
-router.post('/orderDetail/:id/cancel',checkAuth,ordersController.cancel);
-router.post('/orderDetail/:id/next',checkAuth,ordersController.next);
+router.get('/',ensureLoggedIn("/login"),ordersController.list);
+router.get('/orderDetail/:id',ensureLoggedIn("/login"),ordersController.detail);
+router.post('/orderDetail/:id/cancel',ensureLoggedIn("/login"),ordersController.cancel);
+router.post('/orderDetail/:id/next',ensureLoggedIn("/login"),ordersController.next);
 module.exports = router;

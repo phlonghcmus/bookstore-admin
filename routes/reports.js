@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 const reportsController = require('../controllers/reportsController.js');
-const checkAuth = require('../middleware/check-auth.js');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const passport =require ('../passport/index.js');
 
-router.get('/month',checkAuth, reportsController.month);
-router.get('/precious',checkAuth, reportsController.precious);
-router.get('/year',checkAuth, reportsController.year);
-router.get('/top10',checkAuth, reportsController.top);
+router.get('/month',ensureLoggedIn("/login"), reportsController.month);
+router.get('/precious',ensureLoggedIn("/login"), reportsController.precious);
+router.get('/year',ensureLoggedIn("/login"), reportsController.year);
+router.get('/top10',ensureLoggedIn("/login"), reportsController.top);
 module.exports = router;

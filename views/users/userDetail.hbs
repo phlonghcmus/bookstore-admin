@@ -47,6 +47,16 @@
                         </div>
                     </div>
                 </div>
+                 {{#if block}}
+                 <div class="row">
+                    <div class="col-12">
+                        <form action="/users/userDetail/{{id}}/unlock" class="tm-edit-product-form">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Mở Khóa Tài Khoản</button>
+                        </form>
+                    </div>
+                </div>
+                
+                {{else}}
                 <div class="row">
                     <div class="col-12">
                         <form action="/users/userDetail/{{id}}/lock" class="tm-edit-product-form">
@@ -54,14 +64,7 @@
                         </form>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-12">
-                        <form action="/users/userDetail/{{id}}/unlock" class="tm-edit-product-form">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Mở Khóa Tài Khoản</button>
-                        </form>
-                    </div>
-                </div>
+                {{/if}}
         </div>
     </div>
 </div>

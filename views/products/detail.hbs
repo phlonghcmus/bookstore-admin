@@ -122,6 +122,18 @@
                     </div>
                     </form>
                 </div>
+                
+                {{#if remove}}
+                 <br>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="/products/detail/{{id}}/restore" method="post" class="tm-edit-product-form">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Khôi Phục Sách</button>
+                        </form>
+                    </div>
+                </div>
+               
+                {{else}}
                 <br>
                 <div class="row">
                     <div class="col-12">
@@ -130,14 +142,7 @@
                         </form>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-12">
-                        <form action="/products/detail/{{id}}/restore" method="post" class="tm-edit-product-form">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Khôi Phục Sách</button>
-                        </form>
-                    </div>
-                </div>
+                {{/if}}
         </div>
     </div>
 </div>

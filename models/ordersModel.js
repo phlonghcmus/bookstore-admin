@@ -17,7 +17,8 @@ exports.list = async () => {
             {
                 $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$user", 0 ] }, "$$ROOT" ] } }
              },
-             { $project: { user: 0 } }
+             { $project: { user: 0 } },
+             { $sort : { _id : -1 } }
         ]
     ).toArray();
     return orders;
