@@ -66,7 +66,7 @@ exports.restore= async(req, res, next) =>
         }
         await productsModel.delete(req.params.id,data);
     }
-    res.redirect("/products");
+    res.redirect("/products/recycle-bin");
 };
 
 exports.addPage= async(req, res, next) =>
@@ -148,9 +148,10 @@ exports.add= async(req, res, next) =>
             basePrice: parseInt(req.body.price),
             category: req.body.category,
             categoryID: ObjectId(id.toHexString()),
-            sold: parseInt(req.body.sold),
+            sold: parseInt('0'),
             stock: parseInt(req.body.stock),
             remove: false,
+            seen:parseInt('0'),
         };
     }
     else
@@ -163,9 +164,10 @@ exports.add= async(req, res, next) =>
             basePrice: req.body.price,
             category: req.body.category,
             categoryID: ObjectId(id.toHexString()),
-            sold: parseInt(req.body.sold),
+            sold: parseInt('0'),
             stock: parseInt(req.body.stock),
             remove: false,
+            seen:parseInt('0'),
         };
     }
     await productsModel.add(item);
